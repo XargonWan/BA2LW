@@ -18,23 +18,23 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Unity
-      uses: game-ci/unity-setup@v1
+      uses: game-ci/unity-setup@v1.7.0
       with:
-        unityVersion: 6000.0.48f1
+        unityVersion: '6000.0.48f1'
 
     - name: Build for Windows
-      uses: game-ci/unity-builder@v4
+      uses: game-ci/unity-builder@v4.0.0
       with:
-        unityVersion: 6000.0.48f1
+        unityVersion: '6000.0.48f1'
         targetPlatform: StandaloneWindows64
         buildName: BA2LW_Windows
         buildsPath: Builds/Windows
         projectPath: .
 
     - name: Build for Linux
-      uses: game-ci/unity-builder@v4
+      uses: game-ci/unity-builder@v4.0.0
       with:
-        unityVersion: 6000.0.48f1
+        unityVersion: '6000.0.48f1'
         targetPlatform: StandaloneLinux64
         buildName: BA2LW_Linux
         buildsPath: Builds/Linux
