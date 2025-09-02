@@ -136,10 +136,23 @@ namespace BA2LW.Core
 
         #endregion
 
+        #region Wallpaper Setup
+
+        private void SetupWallpaper()
+        {
+            // Set fullscreen to cover the entire screen
+            Screen.fullScreen = true;
+            // Ensure the app runs in background
+            Application.runInBackground = true;
+        }
+
+        #endregion
+
         #region Initialization
 
         private void Awake()
         {
+            SetupWallpaper();
             inputManager = FindFirstObjectByType<InputManager>();
             settingsManager = FindFirstObjectByType<SettingsManager>();
         }
@@ -149,6 +162,8 @@ namespace BA2LW.Core
             m_DebugText.text = string.Empty;
 
             Log.Info("Initializing Components...");
+            // Hide UI for wallpaper mode
+            m_MainCanvas.gameObject.SetActive(false);
             m_BGMAudioSource.gameObject.SetActive(settings.bgm.enable);
             m_SFXAudioSource.gameObject.SetActive(settings.sfx.enable);
             m_VoiceAudioSource.gameObject.SetActive(settings.talk.voiceDirectory != string.Empty);

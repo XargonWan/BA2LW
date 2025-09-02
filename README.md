@@ -48,49 +48,28 @@ This project is a fork of [ba2wall](https://github.com/Tualin14/ba2wall) by [Tua
   (E.g. `Shiroko_home.atlas`, `Shiroko_home.png`, `Shiroko_home2.png`. The student name would be `Shiroko_home`.)
 - [bool] `rotation` Straighten the character. Can be used by student like Xinnai. _(Need more info)_
 - [float] `scale` The scale of character & background Spine.
-- [float] `lookRange` The max range for the eyes to move.
-- [string[]] `imageList` The list of character Spine images.
-- `bone`
-  - [string] `eyeL` Character left eye root bone name.
-  - [string] `eyeR` Character right eye root bone name.
-  - [string] `halo` Character halo root bone name.
-  - [string] `neck` Character neck root bone name.
-- `pat`
-  - [float] `range` Pat area of the head. Rectangle shaped.
-  - [bool] `somethingWrong` Set this to `true` if the head does not follow the mouse movement when you pat. _(Need more info)_
-- `bgm`
-  - [bool] `enable` Enable/Disable background music.
-  - [float] `volume` Background music volume. Range: 0 ~ 1.
-  - [string] `clip` The file name of the background music.
-- `sfx` The L2D sound effect. A few L2D have ambient sounds, such as Kayoko.
-  - [bool] `enable` Enable/Disable sound effect.
-  - [string] `name` The sound effect file name.
-  - [float] `volume` Sound effect volume. Range: 0 ~ 1.
-- `talk`
-  - [string] `voiceData` The directory name of the character voice assets.
-  - [float] `volume` Character voice volume. Range: 0 ~ 1.
-  - [bool] `onlyTalk` Some student sound events are not specifically set and they are all turned on for Talk events. If there is no sound, set it to `true`.
-  - [int] `maxIndex` The number of voice talk animations. Counted only the first number from the last.  
-    (E.g. `Hihumi_MemorialLobby_1_1.ogg`, `Hihumi_MemorialLobby_1_2.ogg`, `Hihumi_MemorialLobby_2_1.ogg`. The index are `2`.)
-- `bg` If the background is also animated, such as Hoshino & Yuzu.
-  - [bool] `isSpine` Is the background animated?
-  - [string] `name` Background image file name. The naming rule are same as `student`.
-  - `state`
-    - [bool] `more` Whether there are other states besides the default state. Such as star field background and animation of a whale. _(Need more info)_
-    - [string] `name` other state names. _(Need more info)_
-  - [string[]] `imageList` The list of background Spine images.
 
----
+## Linux Support
 
-> <h1 align="center">🚧 Need more information 🚧</h1>
+BA2LW now supports Linux with Wayland for use as a live wallpaper.
 
-1. Open the program with debug to see the display on the left
-2. Open the program and the interaction range is correct.
-3. Because these files do not follow certain naming conventions.
+### Building for Linux
 
-   Take halo as an example, the general root bone is named Halo, Halo_Root, Halo_01
+1. Open the project in Unity Editor.
+2. Go to File > Build Settings.
+3. Select "PC, Mac & Linux Standalone" and choose "Linux" as target.
+4. Ensure "Headless Mode" is unchecked, and "Development Build" if needed.
+5. Click "Build" and select a folder (e.g., Builds/Linux).
 
-4. There are cases where the left and right eyes are named oppositely, such as Baizi
+### Running as Wallpaper
+
+Use the provided `run_wallpaper.sh` script to launch the app as a fullscreen transparent window:
+
+```bash
+./run_wallpaper.sh
+```
+
+For desktop environments like GNOME, you may need to use extensions or tools to set a transparent window as wallpaper. Alternatively, the app can be run in the background to simulate a live wallpaper.
 
 ## Student Setup Examples
 
