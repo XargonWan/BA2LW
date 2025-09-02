@@ -18,27 +18,27 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Unity
-      uses: game-ci/unity-setup@v1.7.0
+      uses: Webber/unity-setup@v1
       with:
-        unityVersion: '6000.0.48f1'
+        unity-version: '6000.0.48f1'
 
     - name: Build for Windows
-      uses: game-ci/unity-builder@v4.5.0
+      uses: Webber/unity-builder@v1
       with:
-        unityVersion: '6000.0.48f1'
-        targetPlatform: StandaloneWindows64
-        buildName: BA2LW_Windows
-        buildsPath: Builds/Windows
-        projectPath: .
+        unity-version: '6000.0.48f1'
+        target-platform: StandaloneWindows64
+        build-name: BA2LW_Windows
+        build-path: Builds/Windows
+        project-path: .
 
     - name: Build for Linux
-      uses: game-ci/unity-builder@v4.5.0
+      uses: Webber/unity-builder@v1
       with:
-        unityVersion: '6000.0.48f1'
-        targetPlatform: StandaloneLinux64
-        buildName: BA2LW_Linux
-        buildsPath: Builds/Linux
-        projectPath: .
+        unity-version: '6000.0.48f1'
+        target-platform: StandaloneLinux64
+        build-name: BA2LW_Linux
+        build-path: Builds/Linux
+        project-path: .
 
     - name: Zip Windows build
       run: |
