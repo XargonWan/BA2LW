@@ -1,0 +1,78 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Unity
+      uses: game-ci/unity-setup@v1
+      with:
+        unity-version: 6000.0.48f1
+
+    - name: Build for Windows
+      uses: game-ci/unity-builder@v4
+      with:
+        unity-version: 6000.0.48f1
+        target-platform: StandaloneWindows64
+        build-name: BA2LW_Windows
+        build-path: Builds/Windows
+        project-path: .
+
+    - name: Build for Linux
+      uses: game-ci/unity-builder@v4
+      with:
+        unity-version: 6000.0.48f1
+        target-platform: StandaloneLinux64
+        build-name: BA2LW_Linux
+        build-path: Builds/Linux
+        project-path: .
+
+    - name: Zip Windows build
+      run: |
+        cd Builds/Windows
+        zip -r ../../BA2LW_Windows.zip .
+
+    - name: Zip Linux build
+      run: |
+        cd Builds/Linux
+        zip -r ../../BA2LW_Linux.zip .
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Windows Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./BA2LW_Windows.zip
+        asset_name: BA2LW_Windows.zip
+        asset_content_type: application/zip
+
+    - name: Upload Linux Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./BA2LW_Linux.zip
+        asset_name: BA2LW_Linux.zip
+        asset_content_type: application/zip
